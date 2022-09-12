@@ -13,6 +13,10 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      # Get GH_TOKEN
+      - name: Token
+        run: echo token ${{ secrets.GH_TOKEN }}
+        
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -26,6 +30,3 @@ jobs:
             @semantic-release/changelog
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-      # Get GH_TOKEN
-      - name: Token
-        run: echo token ${{ secrets.GH_TOKEN }}
