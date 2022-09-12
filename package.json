@@ -25,12 +25,8 @@
     "lerna": "4.0.0"
   },
   "dependencies": {
-    "@aws-sdk/client-sts": "3.40.0",
-    "@aws-sdk/credential-provider-ini": "3.40.0",
-    "datadog-lambda-js": "4.67.0",
-    "envalid": "7.2.2",
     "jest": "28.1.3",
-    "jest-2-testrail": "1.0.9",
+    "jest-cucumber": "^3.0.1",
     "jest-junit": "13.0.0"
   }
 }
