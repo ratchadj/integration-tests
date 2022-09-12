@@ -27,8 +27,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          repository: ratchadj/integration-tests
-          ref: v1.0.0
+          repository: ratchadj/bitnami-docker-magento
+          ref: 2.4.2-debian-10-r102
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
