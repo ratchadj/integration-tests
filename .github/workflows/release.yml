@@ -19,10 +19,9 @@ jobs:
         with:
           url: ${{ secrets.VAULT_ADDR }}
           method: github
-          githubToken: ${{ secrets.GH_TOKEN }}
+          githubToken: ${{ secrets.VAULT_TOKEN }}
           secrets: |
             kv/data/pmlo/services/github/pomelo-bot gh_token ;
-            kv/data/pmlo/services/npm/pomelo-bot npm_token ;
         
       - name: Checkout
         uses: actions/checkout@v3
@@ -37,4 +36,4 @@ jobs:
             @semantic-release/changelog
         env:
           GH_TOKEN: ${{ steps.secrets.outputs.GH_TOKEN }}
-          NPM_TOKEN: ${{ steps.secrets.outputs.NPM_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
