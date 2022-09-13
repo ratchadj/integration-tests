@@ -27,7 +27,18 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-          ref: v1.0.1
+          ref: ${{ steps.secrets.outputs.RELEASE_VERSION }}
+
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v2.4.2
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: github
+          githubToken: ${{ secrets.VAULT_TOKEN }}
+          secrets: |
+            kv/data/pmlo/services/github/pomelo-bot gh_token ;
+            kv/data/pmlo/envs/integration-test/staging RELEASE_VERSION;
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
