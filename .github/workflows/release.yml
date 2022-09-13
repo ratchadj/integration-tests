@@ -13,9 +13,16 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      # Get GH_TOKEN
-      - name: Token
-        run: echo token ${{ secrets.GH_TOKEN }}
+      - name: Import Secrets
+        id: secrets
+        uses: hashicorp/vault-action@v2.4.2
+        with:
+          url: ${{ secrets.VAULT_ADDR }}
+          method: github
+          githubToken: ${{ secrets.GH_TOKEN }}
+          secrets: |
+            kv/data/pmlo/services/github/pomelo-bot gh_token ;
+            kv/data/pmlo/services/npm/pomelo-bot npm_token ;
         
       - name: Checkout
         uses: actions/checkout@v3
@@ -29,5 +36,5 @@ jobs:
             @semantic-release/git
             @semantic-release/changelog
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GH_TOKEN: ${{ steps.secrets.outputs.GH_TOKEN }}
+          NPM_TOKEN: ${{ steps.secrets.outputs.NPM_TOKEN }}
