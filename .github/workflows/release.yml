@@ -22,6 +22,11 @@ jobs:
           githubToken: ${{ secrets.VAULT_TOKEN }}
           secrets: |
             kv/data/pmlo/services/github/pomelo-bot gh_token ;
+            kv/data/pmlo/envs/integration-test/staging release_version | RELEASE_VERSION;
+
+      - name: Get Secrets
+        env:
+          RELEASE_VERSION: ${{ steps.secrets.outputs.RELEASE_VERSION }}
         
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,5 +40,5 @@ jobs:
             @semantic-release/git
             @semantic-release/changelog
         env:
-          GH_TOKEN: ${{ steps.secrets.outputs.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
