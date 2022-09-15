@@ -55,3 +55,8 @@ jobs:
       # Get Branch Name
       - name: Branch name with RELEASE_VERSION ${{ github.ref }}
         run: echo running on branch ${GITHUB_REF##*/}
+      
+      # Get Tag name
+      - name: Tag name with RELEASE_VERSION ${{ github.ref_name }}
+        run: "Tag name from github.ref_name: ${{  github.ref_name }}"
+
