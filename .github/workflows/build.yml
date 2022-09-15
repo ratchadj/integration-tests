@@ -50,5 +50,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       # Get Branch Name
-      - name: Branch name
+      - name: Branch name with version ${{ steps.secrets.outputs.RELEASE_VERSION }}
         run: echo running on branch ${GITHUB_REF##*/}
