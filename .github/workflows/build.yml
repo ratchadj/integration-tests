@@ -36,7 +36,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
 #       - uses: actions/checkout@v3
       - name: Check out repository
+        id: checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ secrets.RELEASE_VERSION }}
 #         with:
 #           ref: ${{ steps.secrets.outputs.RELEASE_VERSION }}
 
@@ -50,5 +53,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
       # Get Branch Name
-      - name: Branch name with RELEASE_VERSION ${{ secrets.RELEASE_VERSION }}
+      - name: Branch name with RELEASE_VERSION ${{ github.ref }}
         run: echo running on branch ${GITHUB_REF##*/}
